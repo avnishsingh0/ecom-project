@@ -8,6 +8,7 @@ import shop from '../Asset/img/shop1.jpg'
 import pd from '../Asset/img/pd.png'
 import { FaUserAlt } from 'react-icons/fa';
 import { BsFillHeartFill,BsBagCheckFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   useEffect(()=>{
     const menu = document.querySelector(".menu");
@@ -16,8 +17,6 @@ const Navbar = () => {
     const menuTrigger = document.querySelector(".mobile-menu-trigger");
     const closeMenu = menu.querySelector(".mobile-menu-close");
     let subMenu;
-   
-   
     menuMain.addEventListener("click",(e) =>{
       if(!menu.classList.contains("active")){
         return;
@@ -75,12 +74,15 @@ const Navbar = () => {
   
   
   return (
+    <>
+    
     <div className='nav1'>
+    
      <header className="header">
         <div className="container">
           <div className="row v-center">
             <div className="header-item item-left ">
-              <div className="logo">
+              <div  className="logo">
                 <a href="#"><img className='myntra' src={pd}/></a>
               </div>
             </div>
@@ -96,13 +98,13 @@ const Navbar = () => {
                 </div>
                 <ul className="menu-main">
                   <li>
-                    <a href="#">Home</a>
+                    <a href="/">Home</a>
                   </li>
                   <li className="menu-item-has-children">
                     <a href="#">Categories <i className="fa fa-angle-down" /></a>
                     <div className="sub-menu mega-menu mega-menu-column-4">
                       <div className="list-item text-center">
-                        <a href="#">
+                        <a href="/winter">
                           <img src={image1} alt="new Product" />
                           <h4 className="title">Winter</h4>
                         </a>
@@ -181,19 +183,6 @@ const Navbar = () => {
                       </div>
                     </div>
                   </li>
-
-
-
-                  {/* <li className="menu-item-has-children">
-                    <a href="#">Blog <i className="fas fa-angle-down" /></a>
-                    <div className="sub-menu single-column-menu">
-                      <ul>
-                        <li><a href="#">Standard Layout</a></li>
-                        <li><a href="#">Grid Layout</a></li>
-                        <li><a href="#">single Post Layout</a></li>
-                      </ul>
-                    </div>
-                  </li> */}
                   <li className="menu-item-has-children">
                     <a href="#">Womens <i className="fa fa-angle-down" /></a>
                     <div className="sub-menu mega-menu mega-menu-column-4">
@@ -346,6 +335,7 @@ const Navbar = () => {
       </header>
       
     </div>
+    </>
   )
 }
 
