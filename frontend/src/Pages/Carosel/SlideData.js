@@ -1,7 +1,7 @@
 export const SlideData = [
   {
     image:
-      "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F42422d36-dda3-4de8-af72-9920d51cc644.jpg&w=1920&q=75"
+      "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2023/2/14/7cec9b95-a683-473c-aca8-cc510821b1cd1676394720493-Desktop-Banner.gif"
   },
   {
     image:
