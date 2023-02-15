@@ -1,0 +1,79 @@
+.main-sidebar-div{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin-top: 1rem;
+    
+}
+.filter_h1{
+    display: flex;
+    justify-content:space-around;
+    margin-top: 1rem;
+}
+.filter_h1>h1:nth-child(1){
+    font-weight: 600;
+    font-size: 16px;
+}
+.filter_h1>h1:nth-child(2){
+    font-weight: 600;
+    font-size: 13px;
+    color: #ea4636;
+    margin-left: 0.7rem;
+}
+.main-sidebar-div>div>input{
+    margin-left: 1.5rem;
+    margin-right: 0.7rem;
+    width: 15px;
+    height: 15px; 
+}
+.radio-div>label{
+   font-weight: 600;
+   font-size: 14px;
+}
+.main-sidebar-div>hr{
+    margin-top: 1rem;
+}
+.filter-cat{
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+.catogery_div>div>input{
+    margin-left: 1.5rem;
+    margin-right: 0.7rem;
+    width: 15px;
+    height: 15px; 
+}
+.sidebar{
+    width: 18%;
+}
+span{
+    color: #ea4636;
+}
+.winterlist{
+    width: 82%;
+    
+}
+.main-side{
+    display: flex;
+    gap: 30px;
+}
+@media all and (min-width:270px) and (max-width:550px){
+    .main{
+        display: none;
+    }
+    .main{
+        width: 100%;
+    }
+    .winterlist{
+        width: 100%;
+        
+    }
+    .sidebar{
+        width: 0%;
+    }
+    .main-side{
+        gap: 0px;
+    }
+    
+}

@@ -4,7 +4,7 @@ export const getAdminSucess = (payload) =>{
     return {type: GET_ADMIN_SUCESS,payload}
 }
 
-export const postAdminSucess= (payload)=>{
+export const postAdminSucess= ()=>{
     return {type:POST_ADMIN_SUCESS}
 }
 
@@ -15,9 +15,9 @@ export const adminError= ()=>{
     return {type:ADMIN_ERROR}
 }
 
-export const addProduct =(payload)=>(dispatch)=>{
+export const addProduct =(payLoad)=>(dispatch)=>{
     dispatch(adminRequest())
-    axios.post("http://localhost:8080/Winter",payload).then(()=>{
+    axios.post("http://localhost:8080/Winter",payLoad).then(()=>{
         dispatch(postAdminSucess());
 
     })
