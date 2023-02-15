@@ -5,7 +5,7 @@ import { getWinterData } from '../Redux/Winter/action'
 import WinterCard from './WinterCard'
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { useLocation, useSearchParams } from "react-router-dom";
-
+import Loading from "./Loader";
 const WinterList = () => {
   const {isLoading,winterdata}= useSelector((store)=>store)
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const WinterList = () => {
     
   }, [winterdata.length, dispatch, location.search]);
   if (isLoading) {
-    return <h1>Loading.....</h1>;
+    return <Loading/>;
   }
   return (
     <Box mt={"3.5rem"}>
