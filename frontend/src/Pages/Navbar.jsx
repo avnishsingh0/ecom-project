@@ -8,7 +8,8 @@ import shop from '../Asset/img/shop1.jpg'
 import pd from '../Asset/img/pd.png'
 import { FaUserAlt } from 'react-icons/fa';
 import { BsFillHeartFill,BsBagCheckFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link,NavLink } from 'react-router-dom';
+
 const Navbar = () => {
   useEffect(()=>{
     const menu = document.querySelector(".menu");
@@ -26,8 +27,6 @@ const Navbar = () => {
          showSubMenu(hasChildren);
       }
     });
-   
-    
     goBack.addEventListener("click",() =>{
        hideSubMenu();
     })
@@ -71,19 +70,15 @@ const Navbar = () => {
    
     
   },[])
-  
-  
   return (
     <>
-    
     <div className='nav1'>
-    
      <header className="header">
         <div className="container">
           <div className="row v-center">
             <div className="header-item item-left ">
               <div  className="logo">
-                <a href="#"><img className='myntra' src={pd}/></a>
+                <Link to={"/"}><img className='myntra' src={pd}/></Link>
               </div>
             </div>
             {/* menu start here */}
@@ -98,16 +93,18 @@ const Navbar = () => {
                 </div>
                 <ul className="menu-main">
                   <li>
-                    <a href="/">Home</a>
+                    
+                    <Link to={"/"}>Home</Link>
+                    
                   </li>
                   <li className="menu-item-has-children">
                     <a href="#">Categories <i className="fa fa-angle-down" /></a>
                     <div className="sub-menu mega-menu mega-menu-column-4">
                       <div className="list-item text-center">
-                        <a href="/winter">
+                        <Link to={"/winter"}>
                           <img src={image1} alt="new Product" />
                           <h4 className="title">Winter</h4>
-                        </a>
+                        </Link>
                       </div>
                       <div className="list-item text-center">
                         <a href="#">
@@ -318,9 +315,21 @@ const Navbar = () => {
               </nav>
             </div>
             <div>
-              <input className='input' placeholder='          Search for products, brands and more'/>
+
+
+
+
+
+
+              <input 
+              className='input' 
+              placeholder='Search for products, brands and more'
+              type='text'
+              autoComplete='off'
+              />
             </div>
-            {/* menu end here */}
+           
+
             <div className="header-item item-right">
               <a href="#"><FaUserAlt/></a>
               <a href="#"><BsFillHeartFill/></a>
@@ -332,6 +341,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
       </header>
       
     </div>

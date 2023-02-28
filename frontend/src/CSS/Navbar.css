@@ -10,7 +10,7 @@ body{
 *{
 	margin:0;
 	box-sizing: border-box;
-	color: #000000;
+	/* color: #000000; */
 }
 :before,:after{
 	box-sizing: border-box;

@@ -6,28 +6,48 @@ const Sidebar = () => {
   const [searchParams, setSearchParams] =useSearchParams()
 
   const initalCategory = searchParams.getAll("category");
+  const intialBrand= searchParams.getAll('brand')
   const [category, setCategory] = useState(initalCategory || []);
+  const [brand, setBrand]= useState(intialBrand || [])
   const initalSort = searchParams.getAll("sort");
   const [sort, setSort] = useState(initalSort[0] || "");
 
   const FilterCheckbox = (e) => {
     const newCategories = [...category];
+    
     if (newCategories.includes(e.target.value)) {
       newCategories.splice(newCategories.indexOf(e.target.value), 1);
     } else {
       newCategories.push(e.target.value);
     }
     setCategory(newCategories);
+
+    
   };
+  
+  const FilterBrand=(e)=>{
+    const newBrand= [...brand]
+    if (newBrand.includes(e.target.value)) {
+      newBrand.splice(newBrand.indexOf(e.target.value), 1);
+    } else {
+      newBrand.push(e.target.value);
+    }
+    setBrand(newBrand);
+  }
+
+
+
+
   const sortCheckbox = (e) => {
     setSort(e.target.value);
   };
   useEffect(() => {
     let params = {};
     params.category = category;
+    params.brand= brand;
     sort && (params.sort = sort);
     setSearchParams(params);
-  }, [category, setSearchParams, sort]);
+  }, [category, setSearchParams, sort,brand]);
 
 
 
@@ -84,23 +104,23 @@ const Sidebar = () => {
       <hr/>
       <h1 className='filter-cat'>BRAND</h1>
       <div className='catogery_div'>
-        <input type={'checkbox'} value="Puma" onChange={FilterCheckbox} checked={category.includes("Puma")}/>
+        <input type={'checkbox'} value="Puma" onChange={FilterBrand} checked={brand.includes("Puma")}/>
         <label>Puma</label>
       </div>
       <div>
-        <input type={'checkbox'} value="U.S. Polo Assn." onChange={FilterCheckbox} checked={category.includes("U.S. Polo Assn.")}/>
+        <input type={'checkbox'} value="U.S. Polo Assn." onChange={FilterBrand} checked={brand.includes("U.S. Polo Assn.")}/>
         <label>US. Polo</label>
       </div>
       <div>
-        <input type={'checkbox'} value="Roadster" onChange={FilterCheckbox} checked={category.includes("Roadster")}/>
+        <input type={'checkbox'} value="Roadster" onChange={FilterBrand} checked={brand.includes("Roadster")}/>
         <label>Roadster</label>
       </div>
       <div>
-        <input type={'checkbox'} value="Nike" onChange={FilterCheckbox} checked={category.includes("Nike")}/>
+        <input type={'checkbox'} value="Nike" onChange={FilterBrand} checked={brand.includes("Nike")}/>
         <label>Nike</label>
       </div>
       <div>
-        <input type={'checkbox'} value="Campus" onChange={FilterCheckbox} checked={category.includes("Campus")}/>
+        <input type={'checkbox'} value="Campus" onChange={FilterBrand} checked={brand.includes("Campus")}/>
         <label>Campus</label>
       </div>
     </div>
