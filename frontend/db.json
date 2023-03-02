@@ -34,7 +34,9 @@
       "category": "Shoes",
       "gender": "male",
       "Season": "Winter",
-      "id": 2
+      "id": 2,
+      "rating": 4.5,
+      "rewiew": 35
     },
     {
       "image": "https://assets.myntassets.com/f_webp,dpr_2.6,q_60,w_210,c_limit,fl_progressive/assets/images/21284782/2022/12/23/47abfb74-7689-4d3b-beee-ea3d80baee991671773067070USPoloAssnMenGreyWovenDesignSneakers1.jpg",
@@ -518,6 +520,16 @@
       "gender": "male",
       "Season": "Winter",
       "id": 40
+    },
+    {
+      "image": "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/19166664/2022/9/3/bc70adbf-e6f4-411c-b1e7-332a61b3f7551662187373112-U-S-Polo-Assn-Denim-Co-Men-Navy-Blue--Rust-Red-Slim-Fit-Stri-1.jpg",
+      "brand": "U.S. Polo Assn.",
+      "price": 1599,
+      "title": "Men Cotten Casual Shirt",
+      "category": "Shirt",
+      "gender": "male",
+      "Season": "Winter",
+      "id": 9
     }
   ]
 }
