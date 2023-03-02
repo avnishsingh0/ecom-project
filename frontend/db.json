@@ -17,7 +17,14 @@
       "category": "Shoes",
       "gender": "male",
       "Season": "Winter",
-      "id": 1
+      "Stock": 1,
+      "id": 1,
+      "size": [
+        "#ff755a",
+        "#aecfed",
+        "#0000ff",
+        "#e42529"
+      ]
     },
     {
       "image": "https://assets.myntassets.com/f_webp,dpr_2.6,q_60,w_210,c_limit,fl_progressive/assets/images/18153734/2022/7/1/f0935a4a-f7a9-4bf7-adf5-a7c776d2cb661656653854802-US-Polo-Assn-Men-Casual-Shoes-8251656653854402-1.jpg",
@@ -408,6 +415,15 @@
       "gender": "male",
       "Season": "Winter",
       "id": 40
+    },
+    {
+      "image": "https://assets.leetcode.com/users/images/770789b0-c96b-4663-86d1-baab25534864_1669795265.8012726.png",
+      "brand": "aaaaaaa",
+      "price": 111111111,
+      "title": "ssss",
+      "category": "Trends",
+      "gender": "male",
+      "id": 41
     }
   ],
   "cart": [
@@ -440,6 +456,68 @@
       "gender": "male",
       "Season": "Winter",
       "id": 2
+    },
+    {
+      "sizes": "5(44.5)",
+      "quantity": 1,
+      "totalPrice": null,
+      "id": 3
+    },
+    {
+      "sizes": "5(44.5)",
+      "quantity": 1,
+      "totalPrice": null,
+      "id": 4
+    },
+    {
+      "image": "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/19137750/2022/12/9/be6872ab-740e-45df-9194-c64d10f52a671670583261325USPoloAssnDenimCoMenWhiteBlueSlimFitCheckedPureCottonCasualS1.jpg",
+      "brand": "U.S. Polo Assn.",
+      "price": 2999,
+      "title": "Men Cotten Casual Shirt",
+      "category": "Shirt",
+      "gender": "male",
+      "Season": "Winter",
+      "id": 11
+    },
+    {
+      "image": "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/15654416/2021/10/6/2baa3df0-7590-4fcc-b291-9d84a775caa61633502646677-Computerised-Jacquard-Sweater-381633502646109-1.jpg",
+      "brand": "Roadster",
+      "price": 1012,
+      "title": "Men Checked Pullover",
+      "category": "Sweater",
+      "gender": "male",
+      "Season": "Winter",
+      "id": 37
+    },
+    {
+      "image": "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/20566776/2022/12/6/77d73af9-8ac8-4217-94e0-2ca02bff478e1670329319566-US-Polo-Assn-Men-Blue-Tailored-Fit-Pure-Cotton-Casual-Shirt--1.jpg",
+      "brand": "U.S. Polo Assn.",
+      "price": 1679,
+      "title": "Men Cotten Casual Shirt",
+      "category": "Shirt",
+      "gender": "male",
+      "Season": "Winter",
+      "id": 7
+    },
+    {
+      "image": "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/19166866/2022/11/3/1342fc7e-2eed-4b45-b951-d8df94d523c61667446329989-U-S-Polo-Assn-Men-Grey-Checked-Pure-Cotton-Casual-Shirt-5271-1.jpg",
+      "brand": "U.S. Polo Assn.",
+      "price": 1549,
+      "title": "Men Cotten Casual Shirt",
+      "category": "Shirt",
+      "gender": "male",
+      "Season": "Winter",
+      "id": 14
+    },
+    {
+      "image": "https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/843410/2015/10/28/11446012451876-Roadster-Black-Henley-Sweater-9601446012451378-1.jpg",
+      "brand": "Roadster",
+      "price": 2121,
+      "title": "Hooded Sweater",
+      "category": "Sweater",
+      "gender": "male",
+      "Season": "Winter",
+      "id": 40
     }
   ]
 }

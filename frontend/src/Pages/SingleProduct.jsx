@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
 import "../CSS/SingleProduct.css";
-import { FaFacebook, FaStar, FaStarHalfAlt, FaTwitter } from "react-icons/fa";
+import {  FaStar, FaStarHalfAlt } from "react-icons/fa";
 import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
@@ -12,7 +10,6 @@ import {
 import { TbTruckDelivery } from "react-icons/tb";
 import { BiDetail, BiPurchaseTag } from "react-icons/bi";
 import axios from 'axios'
-
 import {
   Box,
   Button,
@@ -28,16 +25,23 @@ import {
   Tbody,
   Td,
   Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
   UnorderedList,
 } from "@chakra-ui/react";
 import SizeProduct from "../Components/SizeProduct";
+import ReviewCards from "../Components/ReviewCards";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Redux/Winter/action";
 const SingleProduct = () => {
+  
   const {id}= useParams()
   const [single, setSingle]= useState({})
+  const [sizes,setSizes] = useState("5(44.5)");
+  const dispatch = useDispatch();
+
+
   useEffect(()=>{
     axios.get(`http://localhost:8080/Winter/${id}`)
     .then((r)=>{
@@ -47,10 +51,20 @@ const SingleProduct = () => {
       })
   },[setSingle])
 
+  
+  const handleAddToCart = () => {
+   
+    dispatch(addToCart({...single}))
+}
+
+
+
+
+
+
+
+
 const {product_img}= single;
-
-
-console.log(product_img)
   const size = ["#ff755a", "#aecfed", "#0000ff", "#e42529"];
   const imgs = [
     "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10673544/2019/9/24/6b9c7688-7ca2-4d11-9e5b-a3745ecd8f761569310358973-The-Indian-Garage-Co-Men-Shirts-8481569310357131-1.jpg",
@@ -58,37 +72,11 @@ console.log(product_img)
     "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10673544/2019/9/24/66eb9c68-a2d9-41b1-8016-cf769e78d3a11569310358918-The-Indian-Garage-Co-Men-Shirts-8481569310357131-3.jpg",
     "https://cf-images.ap-southeast-1.prod.boltdns.net/v1/jit/5745608584001/fa2bf46e-f698-433e-b18a-e492e6d9dbc3/main/1280x720/21s56ms/match/image.jpg",
   ];
-  
   const [mainImage, setMainImage] = useState(imgs[0]);
   let reviews = single.rewiew;
-
-  const postCart  = ()=>{
-    fetch("http://localhost:8080/cart", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-  
-      body:JSON.stringify(single)
-    }).then((resp)=>{
-      
-      resp.json().then((result)=>{
-       
-      })
-    })
-  }
-  
-
-  
   const ratingStar = Array.from({ length: 5 }, (elem, index) => {
     let number = index + 0.5;
     let stars = single.rating;
-
-
-
-
-    
     return (
       <span key={index}>
         {stars >= index + 1 ? (
@@ -103,6 +91,11 @@ console.log(product_img)
   });
 
 
+  
+
+ 
+    
+    
   return (
     <Box>
       <SimpleGrid columns={[1, 1, 2, 2]} p={5}>
@@ -124,7 +117,6 @@ console.log(product_img)
             
           </SimpleGrid>
         </Box>
-
         <Box p={5} w={"90%"} border={"0px solid red"}>
           <Text fontWeight={"bold"} fontSize={"xl"}>
             {single.title}
@@ -148,15 +140,17 @@ console.log(product_img)
           <Text color="teal" fontWeight={"500"} mt={2} mb={2}>
             inclusive of all taxes
           </Text>
-          <Text fontWeight={"bold"} mb={5}>
+          <Box display={'flex'}>
+          <Text mr={2}> Status: </Text>
+          <Text fontWeight={'bold'} color={single.Stock < 1 ? "red" : "green"}> 
+          {single.Stock < 1 ? "OutOfStock" : "InStock"}</Text>
+          </Box>
+          <Text fontWeight={"bold"} mb={5} mt={2}>
             SELECT COLOR
           </Text>
           <SizeProduct size={size} />
-
-
-
           <HStack mt={7} mb={5}>
-            <Button colorScheme="red" leftIcon={<AiOutlineShoppingCart />} onClick={postCart}>
+            <Button colorScheme="red" leftIcon={<AiOutlineShoppingCart />}  onClick={handleAddToCart} >
               ADD TO BAG
             </Button>
             <Button colorScheme="teal" leftIcon={<AiOutlineHeart />}>
@@ -164,8 +158,6 @@ console.log(product_img)
             </Button>
           </HStack>
           <hr />
-
-
           <Box display={"flex"} mt={4}>
             <Text fontWeight={"500"} mr={3}>
               DELIVERY OPTIONS
@@ -174,7 +166,6 @@ console.log(product_img)
               <TbTruckDelivery />
             </Text>
           </Box>
-
           <InputGroup size="md" w={"15rem"} mt={5}>
             <Input />
             <InputRightElement width="4.5rem">
@@ -183,19 +174,14 @@ console.log(product_img)
               </Button>
             </InputRightElement>
           </InputGroup>
-
-
-          
           <Text mt={3} fontSize={"13px"}>
             Please enter PIN code to check delivery time & Pay on Delivery
             Availability
           </Text>
-
           <Text mt={5}>Try & Buy might be available</Text>
           <Text mt={2}>100% Original Products</Text>
           <Text mt={2}>Pay on delivery might be available</Text>
           <Text mt={2}>Easy 30 days returns and exchanges</Text>
-
           <Box display={"flex"} mt={4}>
             <Text fontWeight={"bold"} mr={3}>
               BEST OFFERS{" "}
@@ -204,7 +190,6 @@ console.log(product_img)
               <BiPurchaseTag className="dil-font" />
             </Text>
           </Box>
-
           <Box display={"flex"} mt={4}>
             <Text fontWeight={"bold"}>Best Price:</Text>
             <Text ml={2} fontWeight={"bold"} color={"orange"}>
@@ -230,7 +215,6 @@ console.log(product_img)
             View Eligible Products
           </Text>
           <hr />
-
           <Box display={"flex"} mt={4}>
             <Text fontWeight={"bold"} mr={3}>
               PRODUCT DETAILS{" "}
@@ -239,10 +223,6 @@ console.log(product_img)
               <BiDetail className="dil-font" />
             </Text>
           </Box>
-
-
-
-          
           <Text mt={4}>Colour: maroon</Text>
           <Text>Ethnic motifs printed</Text>
           <Text>Round neck</Text>
@@ -251,7 +231,6 @@ console.log(product_img)
           <Text>Thread work detail</Text>
           <Text>Calf length with straight hem</Text>
           <Text>Machine weave regular silk</Text>
-
           <Text fontWeight={"bold"} mt={3} mb={3}>
             Size & Fit
           </Text>
@@ -263,7 +242,6 @@ console.log(product_img)
           <Text fontWeight={"bold"} mt={3}>
             Specifications
           </Text>
-
           <TableContainer mt={5} w={"80%"}>
             <Table size="sm">
               <Thead>
@@ -288,9 +266,17 @@ console.log(product_img)
               </Tbody>
             </Table>
           </TableContainer>
+          <Text mt={3} mb={3} fontWeight={'bold'} color={'red'}>See more</Text>
+          <hr/>
+          <Text fontWeight={'bold'} mt={2}>RATINGS</Text>
+          {single.reviews && single.reviews[0] ? (
+              <Box>
+                {single.reviews && single.reviews.map((reviews)=><ReviewCards reviews={reviews}/>)}
+              </Box>
+            ):(
+              <Text>Not reviews yet</Text>
+            )}
         </Box>
-
-
       </SimpleGrid>
     </Box>
   );

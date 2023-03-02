@@ -14,6 +14,7 @@ const SizeProduct = ({size}) => {
                     return (
                         <button
                 key={index}
+                
                 style={{ backgroundColor: curColor }}
                 className={color === curColor ? "btnStyle active" : "btnStyle"}
                 onClick={() => setColor(curColor)}>

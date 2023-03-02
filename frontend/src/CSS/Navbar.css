@@ -10,7 +10,6 @@ body{
 *{
 	margin:0;
 	box-sizing: border-box;
-	/* color: #000000; */
 }
 :before,:after{
 	box-sizing: border-box;
@@ -39,7 +38,6 @@ a{
 	text-decoration: none;
 	
 }
-/* header */
 .nav1{
 	position: sticky;
     top: 0;
@@ -48,13 +46,12 @@ a{
 .header{
 	display: block;
 	width: 100%;
-	
 	position: relative;
 	z-index: 99;
 	padding:15px;
-	/* border: 1px solid red; */
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+	opacity:0.94;
 }
 .header .item-left{
 	flex:0 0 5%;

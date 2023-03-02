@@ -6,7 +6,6 @@ const initialState={
     isError:false
 }
 export const reducer = (state= initialState,{type,payload})=>{
-    // console.log(payload);
     switch(type){
         case ADMIN_REQUEST:
             return {...state, isLoading:true};
