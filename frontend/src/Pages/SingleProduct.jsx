@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../CSS/SingleProduct.css";
-import {  FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
@@ -9,7 +9,7 @@ import {
 } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import { BiDetail, BiPurchaseTag } from "react-icons/bi";
-import axios from 'axios'
+import axios from "axios";
 import {
   Box,
   Button,
@@ -29,42 +29,42 @@ import {
   Thead,
   Tr,
   UnorderedList,
+  useToast,
 } from "@chakra-ui/react";
 import SizeProduct from "../Components/SizeProduct";
 import ReviewCards from "../Components/ReviewCards";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Redux/Winter/action";
+import Navbar from "./Navbar";
 const SingleProduct = () => {
-  
-  const {id}= useParams()
-  const [single, setSingle]= useState({})
-  const [sizes,setSizes] = useState("5(44.5)");
+  const { id } = useParams();
+  const [single, setSingle] = useState({});
+  const [sizes, setSizes] = useState("5(44.5)");
   const dispatch = useDispatch();
 
-
-  useEffect(()=>{
-    axios.get(`http://localhost:8080/Winter/${id}`)
-    .then((r)=>{
-        setSingle({...r.data})
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/Winter/${id}`)
+      .then((r) => {
+        setSingle({ ...r.data });
       })
-      .catch((e)=>{
-      })
-  },[setSingle])
+      .catch((e) => {});
+  }, [setSingle]);
+  const toast = useToast();
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...single }));
+    toast({
+      position: "top",
+      title: "Add to cart.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    })
+  };
 
   
-  const handleAddToCart = () => {
-   
-    dispatch(addToCart({...single}))
-}
 
-
-
-
-
-
-
-
-const {product_img}= single;
+  const { product_img } = single;
   const size = ["#ff755a", "#aecfed", "#0000ff", "#e42529"];
   const imgs = [
     "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10673544/2019/9/24/6b9c7688-7ca2-4d11-9e5b-a3745ecd8f761569310358973-The-Indian-Garage-Co-Men-Shirts-8481569310357131-1.jpg",
@@ -90,13 +90,9 @@ const {product_img}= single;
     );
   });
 
-
-  
-
- 
-    
-    
   return (
+    <>
+    <Navbar/>
     <Box>
       <SimpleGrid columns={[1, 1, 2, 2]} p={5}>
         <Box>
@@ -108,13 +104,12 @@ const {product_img}= single;
                   key={index}
                   cursor={"pointer"}
                   w={130}
-                  borderRadius={10} 
+                  borderRadius={10}
                   src={curLem}
                   onClick={() => setMainImage(curLem)}
                 />
               );
             })}
-            
           </SimpleGrid>
         </Box>
         <Box p={5} w={"90%"} border={"0px solid red"}>
@@ -122,8 +117,7 @@ const {product_img}= single;
             {single.title}
           </Text>
           <Text fontSize={"xl"}>{single.titledetails}</Text>
-         
-         
+
           <Box display={"flex"} mt={5} mb={2}>
             {ratingStar}
             <Text ml={4}>({reviews} customer reviews)</Text>
@@ -140,17 +134,28 @@ const {product_img}= single;
           <Text color="teal" fontWeight={"500"} mt={2} mb={2}>
             inclusive of all taxes
           </Text>
-          <Box display={'flex'}>
-          <Text mr={2}> Status: </Text>
-          <Text fontWeight={'bold'} color={single.Stock < 1 ? "red" : "green"}> 
-          {single.Stock < 1 ? "OutOfStock" : "InStock"}</Text>
+          <Box display={"flex"}>
+            <Text mr={2}> Status: </Text>
+            <Text
+              fontWeight={"bold"}
+              color={single.Stock < 1 ? "red" : "green"}
+            >
+              {single.Stock < 1 ? "OutOfStock" : "InStock"}
+            </Text>
           </Box>
           <Text fontWeight={"bold"} mb={5} mt={2}>
             SELECT COLOR
           </Text>
           <SizeProduct size={size} />
           <HStack mt={7} mb={5}>
-            <Button colorScheme="red" leftIcon={<AiOutlineShoppingCart />}  onClick={handleAddToCart} >
+            <Button
+              colorScheme="red"
+              leftIcon={<AiOutlineShoppingCart />}
+              onClick={
+                handleAddToCart
+                
+              }
+            >
               ADD TO BAG
             </Button>
             <Button colorScheme="teal" leftIcon={<AiOutlineHeart />}>
@@ -193,7 +198,7 @@ const {product_img}= single;
           <Box display={"flex"} mt={4}>
             <Text fontWeight={"bold"}>Best Price:</Text>
             <Text ml={2} fontWeight={"bold"} color={"orange"}>
-              Rs. {single.price-200}
+              Rs. {single.price - 200}
             </Text>
           </Box>
           <UnorderedList mt={4}>
@@ -266,19 +271,27 @@ const {product_img}= single;
               </Tbody>
             </Table>
           </TableContainer>
-          <Text mt={3} mb={3} fontWeight={'bold'} color={'red'}>See more</Text>
-          <hr/>
-          <Text fontWeight={'bold'} mt={2}>RATINGS</Text>
+          <Text mt={3} mb={3} fontWeight={"bold"} color={"red"}>
+            See more
+          </Text>
+          <hr />
+          <Text fontWeight={"bold"} mt={2}>
+            RATINGS
+          </Text>
           {single.reviews && single.reviews[0] ? (
-              <Box>
-                {single.reviews && single.reviews.map((reviews)=><ReviewCards reviews={reviews}/>)}
-              </Box>
-            ):(
-              <Text>Not reviews yet</Text>
-            )}
+            <Box>
+              {single.reviews &&
+                single.reviews.map((reviews) => (
+                  <ReviewCards reviews={reviews} />
+                ))}
+            </Box>
+          ) : (
+            <Text>Not reviews yet</Text>
+          )}
         </Box>
       </SimpleGrid>
     </Box>
+    </>
   );
 };
 

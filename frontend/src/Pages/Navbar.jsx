@@ -333,7 +333,8 @@ const Navbar = () => {
             <div className="header-item item-right">
               <a href="#"><FaUserAlt/></a>
               <a href="#"><BsFillHeartFill/></a>
-              <a href="#"><BsBagCheckFill/></a>
+              <Link to={"/cart"}><BsBagCheckFill/></Link>
+              {/* <a href="#"></a> */}
               {/* mobile menu trigger */}
               <div className="mobile-menu-trigger">
                 <span />

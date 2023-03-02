@@ -16,3 +16,11 @@ export const SINGLE_PRODUCT_DATA_FAILURE = "SINGLE_PRODUCT_DATA_FAILURE";
 
 
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
+
+
+
+export const GET_CART_LOADING = "get/cart/loading"
+export const GET_CART_SUCCESS = "get/cart/success"
+export const GET_CART_ERROR = "get/cart/error"
+export const DELETE_CART_PRODUCT = "delete/cart/product"
+

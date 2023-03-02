@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Admin from '../Admin/Admin';
+import Cart from './Cart';
 import EditProduct from './EditProduct';
 import Homepage from './Home/Homepage';
 import SingleProduct from './SingleProduct';
@@ -18,6 +19,7 @@ const Allroute = () => {
       <Route path="/detalspage/:id" element={<SingleProduct/>} />;
       <Route path='/edit' element={<EditProduct/>}/>
       <Route path="*" element={<div>Page Not Found</div>} />
+      <Route path='/cart' element={<Cart/>}/>
     </Routes>
     // </BrowserRouter>
     

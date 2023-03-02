@@ -6,9 +6,11 @@ import Slider from './Slider'
 import LargeWithNewsletter from './Footer'
 import { SlideData } from '../Carosel/SlideData'
 import { FaSimplybuilt } from 'react-icons/fa'
+import Navbar from '../Navbar'
 const Homepage = () => {
   return (
     <div>
+    <Navbar/>
     <Box w="100%" >
       <ImageSlider slides={SlideData} />
     </Box>
