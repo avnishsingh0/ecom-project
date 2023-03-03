@@ -38,6 +38,10 @@ import { addToCart } from "../Redux/Winter/action";
 import Navbar from "./Navbar";
 const SingleProduct = () => {
   const { id } = useParams();
+
+
+
+  
   const [single, setSingle] = useState({});
   const [sizes, setSizes] = useState("5(44.5)");
   const dispatch = useDispatch();
@@ -53,6 +57,8 @@ const SingleProduct = () => {
   const toast = useToast();
   const handleAddToCart = () => {
     dispatch(addToCart({ ...single }));
+    
+    
     toast({
       position: "top",
       title: "Add to cart.",
@@ -148,9 +154,13 @@ const SingleProduct = () => {
           </Text>
           <SizeProduct size={size} />
           <HStack mt={7} mb={5}>
+
+
+
             <Button
               colorScheme="red"
               leftIcon={<AiOutlineShoppingCart />}
+              
               onClick={
                 handleAddToCart
                 
@@ -158,6 +168,9 @@ const SingleProduct = () => {
             >
               ADD TO BAG
             </Button>
+
+
+
             <Button colorScheme="teal" leftIcon={<AiOutlineHeart />}>
               WISHLIST
             </Button>
