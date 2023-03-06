@@ -17,10 +17,11 @@ export const SINGLE_PRODUCT_DATA_FAILURE = "SINGLE_PRODUCT_DATA_FAILURE";
 
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
 
+export const GET_CART_DATA_REQUEST = "GET_CART_DATA_REQUEST";
+export const GET_CART_DATA_SUCCESS = "GET_CART_DATA_SUCCESS";
+export const GET_CART_DATA_FAILURE = "GET_CART_DATA_FAILURE";
 
-
-export const GET_CART_LOADING = "get/cart/loading"
-export const GET_CART_SUCCESS = "get/cart/success"
-export const GET_CART_ERROR = "get/cart/error"
-export const DELETE_CART_PRODUCT = "delete/cart/product"
-
+export const QUANTITY_CHANGE_SUCCESS = "QUANTITY_CHANGE_SUCCESS";
+export const CART_PAGE_TOTAL_AMOUNT = "CART_PAGE_TOTAL_AMOUNT";
+export const CART_PAGE_TOTAL_ITEMS = "CART_PAGE_TOTAL_ITEMS";
+export const APPLY_COUPON_DISCOUNT = "APPLY_COUPON_DISCOUNT";

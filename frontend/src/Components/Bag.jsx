@@ -10,12 +10,21 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartNav from "../Pages/Home/CartNav";
-import { MdKeyboardArrowUp, MdOutlineEventAvailable } from "react-icons/md";
+import {  MdOutlineEventAvailable } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiPurchaseTagAlt } from "react-icons/bi";
+import { useDispatch, useSelector } from 'react-redux'
+import { getCartData } from "../Redux/Cart/action";
 const Bag = () => {
+  const dispatch = useDispatch();
+  const {isLoading,cart,totalCartAmount,totalItems,discount}= useSelector((store)=>store)
+  
+  useEffect(()=>{
+    dispatch(getCartData);
+  },[])
+  
   const t = 100;
   const [values, setValues] = useState(t);
   const handleChange = (e) => {
@@ -23,8 +32,9 @@ const Bag = () => {
     setValues(t * value);
   };
   const [show, setShow] = React.useState(false);
-
   const handleToggle = () => setShow(!show);
+
+
   return (
     <>
       <CartNav />
@@ -87,8 +97,9 @@ const Bag = () => {
               Show {show ? "Less" : "More"}
             </Text>
           </Box>
-
-          <Flex
+            {cart.length > 0 && 
+            cart.map((el)=>{
+              return<Flex
             mt={2}
             p={"0.5rem"}
             boxShadow={
@@ -96,12 +107,7 @@ const Bag = () => {
             }
           >
             <Box border={"0px solid red"} w={"25%"}>
-              <Image
-                //  objectFit={'cover'}
-                src={
-                  "https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/5842076/2018/12/20/353cd269-5498-4aa9-a6ca-c503fcd2f2c61545286560719-HRX-by-Hrithik-Roshan-Men-White-Rapid-Dry-Camo-Training-T-sh-1.jpg"
-                }
-              />
+              <Image src={el.image}/>
             </Box>
             <Box
               ml={3}
@@ -109,8 +115,8 @@ const Bag = () => {
               border={"0px solid red"}
               w={"85%"}
             >
-              <Text>HRX by Hrithik Roshan</Text>
-              <Text>Men White Rapid T-shirt</Text>
+              <Text>{el.title}</Text>
+              <Text>{el.title}</Text>
               <Text color={"#a9a9a9 "} fontWeight={"600"} fontSize={"12px"}>
                 Sold by: Omnitech Retail
               </Text>
@@ -143,149 +149,21 @@ const Bag = () => {
                 </Select>
               </Flex>
               <Flex gap={2} mt={2}>
-                <Text fontWeight={"600"}>₹659</Text>
+                <Text fontWeight={"600"}>₹{el.price}</Text>
                 <Text color={"#a9a9a9 "} as={"del"}>
-                  ₹1099
+                  ₹{el.price}
                 </Text>
-                <Text color={"red"}>₹659 OFF</Text>
+                <Text color={"red"}>₹65% OFF</Text>
               </Flex>
             </Box>
             <Box cursor={"pointer"}>
               <AiOutlineClose />
             </Box>
           </Flex>
-          <Flex
-            mt={2}
-            p={"0.5rem"}
-            boxShadow={
-              "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;"
+            })
             }
-          >
-            <Box border={"0px solid red"} w={"25%"}>
-              <Image
-                //  objectFit={'cover'}
-                src={
-                  "https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/5842076/2018/12/20/353cd269-5498-4aa9-a6ca-c503fcd2f2c61545286560719-HRX-by-Hrithik-Roshan-Men-White-Rapid-Dry-Camo-Training-T-sh-1.jpg"
-                }
-              />
-            </Box>
-            <Box
-              ml={3}
-              textAlign={"justify"}
-              border={"0px solid red"}
-              w={"85%"}
-            >
-              <Text>HRX by Hrithik Roshan</Text>
-              <Text>Men White Rapid T-shirt</Text>
-              <Text color={"#a9a9a9 "} fontWeight={"600"} fontSize={"12px"}>
-                Sold by: Omnitech Retail
-              </Text>
-              <Flex>
-                <Select
-                  mt={2}
-                  fontWeight={"600"}
-                  fontSize={"14px"}
-                  w={{ base: "40%", sm: "40%", md: "46%", lg: "30%" }}
-                  h={"1.5rem"}
-                  bg={"#f5f5f6"}
-                >
-                  <option>Size: M</option>
-                  <option>Size: L</option>
-                  <option>Size: XL</option>
-                  <option>Size: XXL</option>
-                </Select>
-                <Select
-                  mt={2}
-                  ml={2}
-                  fontWeight={"600"}
-                  fontSize={"14px"}
-                  w={{ base: "40%", sm: "40%", md: "46%", lg: "30%" }}
-                  h={"1.5rem"}
-                  bg={"#f5f5f6"}
-                >
-                  <option>Qty: 1</option>
-                  <option>Qty: 2</option>
-                  <option>Qty: 3</option>
-                </Select>
-              </Flex>
-              <Flex gap={2} mt={2}>
-                <Text fontWeight={"600"}>₹659</Text>
-                <Text color={"#a9a9a9 "} as={"del"}>
-                  ₹1099
-                </Text>
-                <Text color={"red"}>₹659 OFF</Text>
-              </Flex>
-            </Box>
-            <Box cursor={"pointer"}>
-              <AiOutlineClose />
-            </Box>
-          </Flex>
-          <Flex
-            mt={2}
-            p={"0.5rem"}
-            boxShadow={
-              "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;"
-            }
-          >
-            <Box border={"0px solid red"} w={"25%"}>
-              <Image
-                //  objectFit={'cover'}
-                src={
-                  "https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/5842076/2018/12/20/353cd269-5498-4aa9-a6ca-c503fcd2f2c61545286560719-HRX-by-Hrithik-Roshan-Men-White-Rapid-Dry-Camo-Training-T-sh-1.jpg"
-                }
-              />
-            </Box>
-            <Box
-              ml={3}
-              textAlign={"justify"}
-              border={"0px solid red"}
-              w={"85%"}
-            >
-              <Text>HRX by Hrithik Roshan</Text>
-              <Text>Men White Rapid T-shirt</Text>
-              <Text color={"#a9a9a9 "} fontWeight={"600"} fontSize={"12px"}>
-                Sold by: Omnitech Retail
-              </Text>
-              <Flex>
-                <Select
-                  mt={2}
-                  fontWeight={"600"}
-                  fontSize={"14px"}
-                  w={{ base: "40%", sm: "40%", md: "46%", lg: "30%" }}
-                  h={"1.5rem"}
-                  bg={"#f5f5f6"}
-                >
-                  <option>Size: M</option>
-                  <option>Size: L</option>
-                  <option>Size: XL</option>
-                  <option>Size: XXL</option>
-                </Select>
-                <Select
-                  mt={2}
-                  ml={2}
-                  fontWeight={"600"}
-                  fontSize={"14px"}
-                  w={{ base: "40%", sm: "40%", md: "46%", lg: "30%" }}
-                  h={"1.5rem"}
-                  bg={"#f5f5f6"}
-                >
-                  <option>Qty: 1</option>
-                  <option>Qty: 2</option>
-                  <option>Qty: 3</option>
-                </Select>
-              </Flex>
-              <Flex gap={2} mt={2}>
-                <Text fontWeight={"600"}>₹659</Text>
-                <Text color={"#a9a9a9 "} as={"del"}>
-                  ₹1099
-                </Text>
-                <Text color={"red"}>₹659 OFF</Text>
-              </Flex>
-            </Box>
-            <Box cursor={"pointer"}>
-              <AiOutlineClose />
-            </Box>
-          </Flex>
+          
+         
         </Box>
 
         <Box
