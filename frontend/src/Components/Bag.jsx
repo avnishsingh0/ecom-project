@@ -4,11 +4,20 @@ import {
   Collapse,
   Flex,
   Image,
+  Input,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
   SimpleGrid,
   Text,
   UnorderedList,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import CartNav from "../Pages/Home/CartNav";
@@ -16,28 +25,40 @@ import {  MdOutlineEventAvailable } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux'
-import { getCartData } from "../Redux/Cart/action";
+import { getCartData, handleCouponDiscount } from "../Redux/Cart/action";
+import SingleCard from "./SingleCard";
 const Bag = () => {
   const dispatch = useDispatch();
   const {isLoading,cart,totalCartAmount,totalItems,discount}= useSelector((store)=>store)
-  
+  const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(()=>{
     dispatch(getCartData);
   },[])
-  
+  var grandtotal = 0;
   const t = 100;
   const [values, setValues] = useState(t);
+  const [data, setData] = useState("");
   const handleChange = (e) => {
     const { value } = e.target;
     setValues(t * value);
   };
   const [show, setShow] = React.useState(false);
   const handleToggle = () => setShow(!show);
-
-
+  const handleCouponCode = () => {
+    // console.log(data);
+    dispatch(handleCouponDiscount(data, cart.price));
+  };
+  
   return (
     <>
       <CartNav />
+      {cart.length > 0 &&
+                    cart.map((product, index) => {
+                      grandtotal += product.quantity * product.price;
+                      console.log(grandtotal)
+                      return (
+                        <Box key={index}></Box>
+                        )})}
       <SimpleGrid
         columns={[1, 1, 2, 2]}
         w={{ base: "95%", sm: "95%", md: "90%", lg: "75%" }}
@@ -99,67 +120,7 @@ const Bag = () => {
           </Box>
             {cart.length > 0 && 
             cart.map((el)=>{
-              return<Flex
-            mt={2}
-            p={"0.5rem"}
-            boxShadow={
-              "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;"
-            }
-          >
-            <Box border={"0px solid red"} w={"25%"}>
-              <Image src={el.image}/>
-            </Box>
-            <Box
-              ml={3}
-              textAlign={"justify"}
-              border={"0px solid red"}
-              w={"85%"}
-            >
-              <Text>{el.title}</Text>
-              <Text>{el.title}</Text>
-              <Text color={"#a9a9a9 "} fontWeight={"600"} fontSize={"12px"}>
-                Sold by: Omnitech Retail
-              </Text>
-              <Flex>
-                <Select
-                  mt={2}
-                  fontWeight={"600"}
-                  fontSize={"14px"}
-                  w={{ base: "40%", sm: "40%", md: "46%", lg: "30%" }}
-                  h={"1.5rem"}
-                  bg={"#f5f5f6"}
-                >
-                  <option>Size: M</option>
-                  <option>Size: L</option>
-                  <option>Size: XL</option>
-                  <option>Size: XXL</option>
-                </Select>
-                <Select
-                  mt={2}
-                  ml={2}
-                  fontWeight={"600"}
-                  fontSize={"14px"}
-                  w={{ base: "40%", sm: "40%", md: "46%", lg: "30%" }}
-                  h={"1.5rem"}
-                  bg={"#f5f5f6"}
-                >
-                  <option>Qty: 1</option>
-                  <option>Qty: 2</option>
-                  <option>Qty: 3</option>
-                </Select>
-              </Flex>
-              <Flex gap={2} mt={2}>
-                <Text fontWeight={"600"}>₹{el.price}</Text>
-                <Text color={"#a9a9a9 "} as={"del"}>
-                  ₹{el.price}
-                </Text>
-                <Text color={"red"}>₹65% OFF</Text>
-              </Flex>
-            </Box>
-            <Box cursor={"pointer"}>
-              <AiOutlineClose />
-            </Box>
-          </Flex>
+              return<SingleCard key={el.id} card= {el}/>
             })
             }
           
@@ -184,6 +145,7 @@ const Bag = () => {
               variant="outline"
               borderRadius={"0px"}
               h={"2rem"}
+              onClick={onOpen}
             >
               APPLY
             </Button>
@@ -200,7 +162,6 @@ const Bag = () => {
                 "https://constant.myntassets.com/checkout/assets/img/gift-big.webp"
               }
             />
-          
             <Box ml={4}>
             <Text fontWeight={"600"}>Buying for a loved one ?</Text>
             <Text fontWeight={"400"} fontSize={"13px"}>Gift wrap and personalised message on card, Only for 25</Text>
@@ -208,14 +169,14 @@ const Bag = () => {
             </Box>
           </Flex>
           <hr/>
-          <Text mt={'1rem'} fontWeight={'600'} fontSize={'12px'}>PRICE DETAILS (3 Items)</Text>
+          <Text mt={'1rem'} fontWeight={'600'} fontSize={'12px'}>PRICE DETAILS ({totalItems} items)</Text>
           <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'}>
             <Text>Total MRP </Text>
-            <Text>₹ 3,097</Text>
+            <Text>₹ {grandtotal*2}</Text>
           </Flex>
           <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'}>
             <Text>Discount on MRP </Text>
-            <Text color={'green'}>-₹ 1,478</Text>
+            <Text color={'green'}>-₹ {grandtotal}</Text>
           </Flex>
           <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'}>
             <Text>Coupon Discount </Text>
@@ -228,9 +189,33 @@ const Bag = () => {
           <hr/>
           <Flex justifyContent={'space-between'} mt={2} fontSize={'16px'}>
             <Text fontWeight={'600'}>Total Amount</Text>
-            <Text fontWeight={'600'}>₹ 1,619</Text>
+            <Text fontWeight={'600'}>₹ {grandtotal}</Text>
           </Flex>
           <Button w={'100%'} mt={3} borderRadius={'0'} colorScheme='red'>PLACE ORDER</Button>
+        </Box>
+        <Box>
+          {discount === 0 ? (
+            <Modal onClose={onClose} isOpen={isOpen} isCentered>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Enter Coupon Code</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Input
+                    placeholder="Enter Coupon Code"
+                    value={data}
+                    onChange={(e) => setData(e.target.value)}
+                  ></Input>
+                  <Button onClick={handleCouponCode}>Apply</Button>
+                </ModalBody>
+                <ModalFooter>
+                  <Button onClick={onClose}>Close</Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+          ) : (
+            ""
+          )}
         </Box>
       </SimpleGrid>
     </>
