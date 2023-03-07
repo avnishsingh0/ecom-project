@@ -4,9 +4,11 @@ import Sidebar from '../Components/Sidebar'
 import WinterList from '../Components/WinterList'
 
 import '../CSS/Sidebar.css'
+import Navbar from './Navbar'
 const Winter = () => {
   return (
-    
+    <>
+    <Navbar/>
     <div className='main-side'>
     <div className='sidebar' >
     <Sidebar/>
@@ -15,6 +17,7 @@ const Winter = () => {
     <WinterList/>
     </div>
     </div>
+    </>
     
     
   )
