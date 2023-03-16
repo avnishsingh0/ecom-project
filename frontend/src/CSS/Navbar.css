@@ -347,6 +347,7 @@ a{
 		height: 100%;
 		overflow-x: hidden;
 		overflow-y: auto;
+		
 	}
 	.header .menu > ul > li .sub-menu.mega-menu,
 	.header .menu > ul > li .sub-menu{
@@ -430,3 +431,33 @@ a{
 }
 
 
+.mb_downNav {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    position: fixed;
+    background-color: #fff;
+    bottom: 0;
+    z-index: 5;
+}
+.btn{
+     
+        margin: auto;
+        justify-content: center;
+        text-align: center;
+        border: none;
+}
+.icon{
+            margin: auto;
+            font-size: 25px;
+            color: rgb(66, 65, 65);
+     }
+        p{
+            font-size: 14px;
+            color: rgb(66, 65, 65);
+        }
+    
+
+.mb_downNav.active, .btn:hover .icon p{
+	color: #e40046;
+	}	

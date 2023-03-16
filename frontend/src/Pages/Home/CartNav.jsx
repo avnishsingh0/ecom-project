@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { BsFillCheckCircleFill } from "react-icons/bs";
+import Bag from "../../Components/Bag";
 const CartNav = () => {
   return (
     <>
@@ -31,9 +32,9 @@ const CartNav = () => {
           color={"#a9a9a9"}
           fontWeight={"bold"}
         >
-          <Link to={"/bag"}>Bag</Link>
-          <Link to={"/address"}>Address</Link>
-          <Link to={"/payment"}>Payment</Link>
+          <Link to={"/cart/bag"}>Bag</Link>
+          <Link to={"/cart/address"}>Address</Link>
+          <Link to={"/cart/payment"}>Payment</Link>
         </Box>
 
         <Image
@@ -42,6 +43,7 @@ const CartNav = () => {
         />
       </Box>
       <hr />
+      {/* <Bag/> */}
     </>
   );
 };

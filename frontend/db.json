@@ -438,8 +438,8 @@
       "gender": "male",
       "Season": "Winter",
       "id": 7,
-      "quantity": 1,
-      "totalPrice": 1679
+      "quantity": 3,
+      "totalPrice": 5037
     },
     {
       "image": "https://assets.myntassets.com/f_webp,dpr_2.8,q_60,w_210,c_limit,fl_progressive/assets/images/19166664/2022/9/3/bc70adbf-e6f4-411c-b1e7-332a61b3f7551662187373112-U-S-Polo-Assn-Denim-Co-Men-Navy-Blue--Rust-Red-Slim-Fit-Stri-1.jpg",
@@ -450,8 +450,8 @@
       "gender": "male",
       "Season": "Winter",
       "id": 2,
-      "quantity": 1,
-      "totalPrice": 1599
+      "quantity": 3,
+      "totalPrice": 4797
     }
   ]
 }

@@ -9,7 +9,10 @@ import pd from '../Asset/img/pd.png'
 import { FaUserAlt } from 'react-icons/fa';
 import { BsFillHeartFill,BsBagCheckFill } from 'react-icons/bs';
 import { Link,NavLink } from 'react-router-dom';
-
+import { Hide, Input, Show, Text } from '@chakra-ui/react'
+import { BiCart, BiCategory, BiHomeAlt } from 'react-icons/bi'
+import { AiOutlineHeart } from 'react-icons/ai'
+import {CgProfile} from 'react-icons/cg'
 const Navbar = () => {
   useEffect(()=>{
     const menu = document.querySelector(".menu");
@@ -83,19 +86,17 @@ const Navbar = () => {
             </div>
             {/* menu start here */}
             <div className="header-item item-center">
-              <div className="menu-overlay">
+              <div className="menu-overlay ">
               </div>
               <nav className="menu">
-                <div className="mobile-menu-head">
+                <div className="mobile-menu-head menu-mai">
                   <div className="go-back"><i className="fa fa-angle-left" /></div>
                   <div className="current-menu-title" />
                   <div className="mobile-menu-close">×</div>
                 </div>
                 <ul className="menu-main">
                   <li>
-                    
                     <Link to={"/"}>Home</Link>
-                    
                   </li>
                   <li className="menu-item-has-children">
                     <a href="#">Categories <i className="fa fa-angle-down" /></a>
@@ -245,7 +246,6 @@ const Navbar = () => {
                       </div>
                     </div>
                   </li>
-                  
                   <li className="menu-item-has-children">
                     <a href="#">Kids <i className="fa fa-angle-down" /></a>
                     <div className="sub-menu mega-menu mega-menu-column-4">
@@ -313,29 +313,24 @@ const Navbar = () => {
                   </li>
                 </ul>
               </nav>
-            </div>
-            <div>
-
-
-
-
-
-
-              <input 
+            </div>  
+            <div className="menu-mai">
+            <input 
               className='input' 
-              placeholder='Search for products, brands and more'
+              placeholder='    Search for products, brands and more'
               type='text'
               autoComplete='off'
               />
             </div>
-           
-
             <div className="header-item item-right">
+            <Hide breakpoint="(max-width: 1186px)">
+            <div>
               <a href="#"><FaUserAlt/></a>
               <a href="#"><BsFillHeartFill/></a>
               <Link to={"/cart"}><BsBagCheckFill/></Link>
-              {/* <a href="#"></a> */}
-              {/* mobile menu trigger */}
+              </div>
+            </Hide>
+            
               <div className="mobile-menu-trigger">
                 <span />
               </div>
@@ -346,6 +341,51 @@ const Navbar = () => {
       </header>
       
     </div>
+    <Show breakpoint="(max-width: 1186px)">
+        
+
+       
+        <div className="mb_downNav">
+          <button className="btn">
+            <Text>
+              <BiHomeAlt className="icon" />
+            </Text>
+            <p>Home</p>
+          </button>
+
+          <button className="btn">
+            <Text>
+              <BiCategory className="icon" />
+            </Text>
+            <p>Category</p>
+          </button>
+
+          <button className="btn">
+          <Link to={"/cart"}>
+            <Text>
+              <BiCart className="icon" />
+            </Text>
+            <p>Cart</p>
+            </Link>
+          </button>
+
+          <button className="btn">
+            <Text>
+              <AiOutlineHeart className="icon" />
+            </Text>
+            <p>Wishlist</p>
+          </button>
+          <button className="btn">
+          <Link to={"#"}>
+            <Text>
+              <CgProfile className="icon" />
+            </Text>
+            <p>Profile</p>
+          </Link>
+          </button>
+        </div>
+      </Show>
+
     </>
   )
 }

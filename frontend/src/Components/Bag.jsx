@@ -27,6 +27,8 @@ import { BiPurchaseTagAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from 'react-redux'
 import { getCartData, handleCouponDiscount } from "../Redux/Cart/action";
 import SingleCard from "./SingleCard";
+import { Link } from "react-router-dom";
+import Loading from "./Loader";
 const Bag = () => {
   const dispatch = useDispatch();
   const {isLoading,cart,totalCartAmount,totalItems,discount}= useSelector((store)=>store)
@@ -48,6 +50,9 @@ const Bag = () => {
     // console.log(data);
     dispatch(handleCouponDiscount(data, cart.price));
   };
+  if (isLoading) {
+    return <Loading/>;
+  }
   
   return (
     <>
@@ -191,8 +196,11 @@ const Bag = () => {
             <Text fontWeight={'600'}>Total Amount</Text>
             <Text fontWeight={'600'}>₹ {grandtotal}</Text>
           </Flex>
+          <Link to="/cart/address">
           <Button w={'100%'} mt={3} borderRadius={'0'} colorScheme='red'>PLACE ORDER</Button>
+          </Link>
         </Box>
+
         <Box>
           {discount === 0 ? (
             <Modal onClose={onClose} isOpen={isOpen} isCentered>

@@ -23,10 +23,10 @@ const Allroute = () => {
       <Route path="/detalspage/:id" element={<SingleProduct/>} />;
       <Route path='/edit' element={<EditProduct/>}/>
       <Route path="*" element={<div>Page Not Found</div>} />
-      <Route path='/cart' element={<CartNav/>}/>
-      <Route path='/bag' element={<Bag/>}/>
-      <Route path='/address' element={<Address/>}/>
-      <Route path='/payment' element={<Payment/>}/>
+      <Route path='/cart' element={<Bag/>}/>
+      <Route path='/cart/bag' element={<Bag/>}/>
+      <Route path='/cart/address' element={<Address/>}/>
+      <Route path='/cart/payment' element={<Payment/>}/>
     </Routes>
     // </BrowserRouter>
     
