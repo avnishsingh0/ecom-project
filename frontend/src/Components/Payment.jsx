@@ -9,11 +9,14 @@ import {
   Heading,
   HStack,
   Input,
+  Image,
   SimpleGrid,
   Spacer,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { ToastContainer } from 'react-bootstrap';
+import PaymentMethod from './PaymentMethod';
 const Payment = () => {
   const grandtotal=100;
   const totalItems=4;
@@ -39,8 +42,9 @@ const Payment = () => {
   };
   return (
     <>
-      <CartNav/>
-      <SimpleGrid
+      <CartNav step1 step2 step3/>
+   
+        <SimpleGrid
         columns={[1, 1, 2, 2]}
         w={{ base: "95%", sm: "95%", md: "90%", lg: "70%" }}
         gap={1}
@@ -64,64 +68,86 @@ const Payment = () => {
                       marginTop={[0, 0, 0]}
                       
                     >
-                      <Box onClick={handleToggle} style={activeStyle} p={4}>
+                      <Box onClick={handleToggle} style={activeStyle} p={1}>
                         Cash On Delivery
                       </Box>
                       <Box
-                        mt={2}
+                        mt={5}
                         onClick={handleToggle}
                         style={defaultStyle}
-                        p={4}
+                        p={3}
                       >
-                        Credit/Debit Card
+                        PhonePe/PayPal
+                        
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
-                        PhonePe/Google
+                      <Box mt={4} style={defaultStyle} p={1}>
+                      Credit/Debit
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
+                      <Box mt={4} style={defaultStyle} p={1}>
                         Pay-tm/Wallets
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
+                      <Box mt={4} style={defaultStyle} p={1}>
                         Net Banking
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
+                      <Box mt={4} style={defaultStyle} p={1}>
                         EMI/Pay Later
                       </Box>
                     </Box>
                   ) : (
                     <Box marginTop={[0, 0, 0]} >
-                      <Box onClick={handleToggle} style={defaultStyle} p={4}>
+                      <Box onClick={handleToggle} style={defaultStyle} p={1}>
                         Cash On Delivery
                       </Box>
                       <Box
-                        mt={2}
+                        mt={4}
                         onClick={handleToggle}
                         style={activeStyle}
-                        p={4}
+                        p={1}
                       >
-                        Credit/Debit Card
+                        PhonePe/PayPal
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
-                        PhonePe/Google
+                      <Box mt={4} style={defaultStyle} p={1}>
+                      Credit/Debit
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
+                      <Box mt={4} style={defaultStyle} p={1}>
                         Pay-tm/Wallets
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
+                      <Box mt={4} style={defaultStyle} p={1}>
                         Net Banking
                       </Box>
-                      <Box mt={2} style={defaultStyle} p={4}>
+                      <Box mt={4} style={defaultStyle} p={1}>
                         EMI/Pay Later
                       </Box>
                     </Box>
                   )}
                   {toggle ? (
-                    <Box pl={4}>
-                      
+                    <Box p={1}>
+                      <Stack border={"0px solid"} textAlign="left" spacing={4}>
+                        <FormControl>
+                          <Stack spacing={4}>
+                            <Text marginBottom={"30px"} fontWeight={"700"} textAlign={'center'}>
+                              Pay On Delivery (Cash/UPI)
+                            </Text>
+                            <Text fontSize={"12px"} color={"gray"}>
+                              You can pay via Cash or UPI enabled app at the
+                              time on delivery. Ask executive for these options
+                            </Text>
+                            <Button
+                              background={"#ff3f6c"}
+                              color="#fff"
+                              _hover={{
+                                backgroundColor: "#fff36c",
+                              }}
+                            >
+                              Place Order
+                            </Button>
+                          </Stack>
+                        </FormControl>
+                      </Stack>
                     </Box>
                   ) : (
-                    <Box textAlign={"left"} pl={4}>
-                      
+                    <Box p={8}>
+                      <PaymentMethod/>
                     </Box>
                   )
                   }
