@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../Redux/Auth/action";
+import Navbar from "./Navbar";
+import LargeWithNewsletter from './Home/Footer'
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,6 +32,7 @@ export default function Login() {
     if (userInfo && navigate && navigate) {
       navigate(redirect);
     }
+    
   }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
@@ -37,6 +40,8 @@ export default function Login() {
     dispatch(login(email, password));
   };
   return (
+    <>
+    <Navbar/>
     <Flex
       minH={"100vh"}
       align={"center"}
@@ -102,5 +107,7 @@ export default function Login() {
         </Box>
       </Stack>
     </Flex>
+    <LargeWithNewsletter/>
+    </>
   );
 }
