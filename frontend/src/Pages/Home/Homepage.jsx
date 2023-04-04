@@ -1,24 +1,21 @@
 import { Box, Image, SimpleGrid, Text } from '@chakra-ui/react'
-import { Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 import ImageSlider from '../Carosel/Carousel'
-import Slider from './Slider'
 import LargeWithNewsletter from './Footer'
 import { SlideData } from '../Carosel/SlideData'
-import { FaSimplybuilt } from 'react-icons/fa'
 import Navbar from '../Navbar'
+import { Link } from 'react-router-dom'
 const Homepage = () => {
   return (
     <div>
     <Navbar/>
+    
     <Box w="100%" >
       <ImageSlider slides={SlideData} />
     </Box>
-    {/* <Slider/> */}
     <Text ml={'2rem'} fontSize={'3xl'} fontWeight={'700'} mt={'4rem'}>DEAL OF THE DAY</Text>
     <Box>
     </Box> 
-
     <Box m={1} gap={5} mt={'4rem'}>
       <SimpleGrid columns={[2,8,8,8]} gap={0}>
         <Image objectFit={"cover"} src='https://assets.myntassets.com/f_webp,w_122,c_limit,fl_progressive,dpr_2.0/assets/images/2022/8/17/49939a83-5bf1-4c78-b55d-40d7545f843e1660744474034-Kurtas--4-.jpg'/>

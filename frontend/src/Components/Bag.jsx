@@ -4,66 +4,43 @@ import {
   Collapse,
   Flex,
   Image,
-  Input,
   ListItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
   SimpleGrid,
   Text,
   UnorderedList,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { MdOutlineEventAvailable } from "react-icons/md";
+import React, { useEffect } from "react";
 import CartNav from "../Pages/Home/CartNav";
-import {  MdOutlineEventAvailable } from "react-icons/md";
-import { AiOutlineClose } from "react-icons/ai";
 import { BiPurchaseTagAlt } from "react-icons/bi";
-import { useDispatch, useSelector } from 'react-redux'
-import { getCartData, handleCouponDiscount } from "../Redux/Cart/action";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../Redux/Cart/action";
 import SingleCard from "./SingleCard";
-import { Link } from "react-router-dom";
-import Loading from "./Loader";
+
 const Bag = () => {
   const dispatch = useDispatch();
-  const {isLoading,cart,totalCartAmount,totalItems,discount}= useSelector((store)=>store)
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  useEffect(()=>{
-    dispatch(getCartData);
-  },[])
-  var grandtotal = 0;
-  const t = 100;
-  const [values, setValues] = useState(t);
-  const [data, setData] = useState("");
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setValues(t * value);
-  };
+  const { onOpen } = useDisclosure();
+  const { id } = useParams();
+  const qty = window.location.search
+    ? Number(window.location.search.split("=")[1])
+    : 1;
   const [show, setShow] = React.useState(false);
   const handleToggle = () => setShow(!show);
-  const handleCouponCode = () => {
-    // console.log(data);
-    dispatch(handleCouponDiscount(data, cart.price));
-  };
-  if (isLoading) {
-    return <Loading/>;
-  }
-  
+
+  useEffect(() => {
+    if (id) {
+      dispatch(addToCart(id, qty));
+    }
+  }, [dispatch, id, qty]);
+
+  const cart = useSelector((state) => state.cartReducer);
+  const { cartItems } = cart;
+
   return (
     <>
-      <CartNav />
-      {cart.length > 0 &&
-                    cart.map((product, index) => {
-                      grandtotal += product.quantity * product.price;
-                      console.log(grandtotal)
-                      return (
-                        <Box key={index}></Box>
-                        )})}
+      <CartNav step1 />
       <SimpleGrid
         columns={[1, 1, 2, 2]}
         w={{ base: "95%", sm: "95%", md: "90%", lg: "75%" }}
@@ -123,15 +100,11 @@ const Bag = () => {
               Show {show ? "Less" : "More"}
             </Text>
           </Box>
-            {cart.length > 0 && 
-            cart.map((el)=>{
-              return<SingleCard key={el.id} card= {el}/>
-            })
-            }
-          
-         
+          {cartItems.length > 0 &&
+            cartItems.map((el) => {
+              return <SingleCard key={el._id} card={el} />;
+            })}
         </Box>
-
         <Box
           border={"0px solid red"}
           p={"1rem"}
@@ -156,10 +129,16 @@ const Bag = () => {
             </Button>
           </Flex>
           <hr />
-          <Text fontSize={"12px"} fontWeight={"600"} mt={'1rem'} >
+          <Text fontSize={"12px"} fontWeight={"600"} mt={"1rem"}>
             GIFTING & PERSONALISATION
           </Text>
-          <Flex bg={"#fff1ec"} alignItems="center" borderRadius={"5px"} mt={'1rem'} mb={'1rem'}>
+          <Flex
+            bg={"#fff1ec"}
+            alignItems="center"
+            borderRadius={"5px"}
+            mt={"1rem"}
+            mb={"1rem"}
+          >
             <Image
               ml={3}
               w={"11%"}
@@ -168,63 +147,70 @@ const Bag = () => {
               }
             />
             <Box ml={4}>
-            <Text fontWeight={"600"}>Buying for a loved one ?</Text>
-            <Text fontWeight={"400"} fontSize={"13px"}>Gift wrap and personalised message on card, Only for 25</Text>
-            <Text fontWeight={"bold"} fontSize={"11.5px"} color={'red'}>ADD GIFT WRAP</Text>
+              <Text fontWeight={"600"}>Buying for a loved one ?</Text>
+              <Text fontWeight={"400"} fontSize={"13px"}>
+                Gift wrap and personalised message on card, Only for 25
+              </Text>
+              <Text fontWeight={"bold"} fontSize={"11.5px"} color={"red"}>
+                ADD GIFT WRAP
+              </Text>
             </Box>
           </Flex>
-          <hr/>
-          <Text mt={'1rem'} fontWeight={'600'} fontSize={'12px'}>PRICE DETAILS ({totalItems} items)</Text>
-          <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'}>
+          <hr />
+          <Text mt={"1rem"} fontWeight={"600"} fontSize={"12px"}>
+            PRICE DETAILS ({cartItems.reduce((acc, item) => acc + item.qty, 0)}{" "}
+            items)
+          </Text>
+          <Flex justifyContent={"space-between"} mt={2} fontSize={"14px"}>
             <Text>Total MRP </Text>
-            <Text>₹ {grandtotal*2}</Text>
+            <Text>
+              ₹{" "}
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2) *
+                2 -
+                10}
+            </Text>
           </Flex>
-          <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'}>
+          <Flex justifyContent={"space-between"} mt={2} fontSize={"14px"}>
             <Text>Discount on MRP </Text>
-            <Text color={'green'}>-₹ {grandtotal}</Text>
+            <Text color={"green"}>
+              -₹{" "}
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2) + 10}
+            </Text>
           </Flex>
-          <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'}>
+          <Flex justifyContent={"space-between"} mt={2} fontSize={"14px"}>
             <Text>Coupon Discount </Text>
             <Text color="red">Apply Coupon</Text>
           </Flex>
-          <Flex justifyContent={'space-between'} mt={2} fontSize={'14px'} mb={3}>
+          <Flex
+            justifyContent={"space-between"}
+            mt={2}
+            fontSize={"14px"}
+            mb={3}
+          >
             <Text>Convenience Fee </Text>
             <Text color="green">Free</Text>
           </Flex>
-          <hr/>
-          <Flex justifyContent={'space-between'} mt={2} fontSize={'16px'}>
-            <Text fontWeight={'600'}>Total Amount</Text>
-            <Text fontWeight={'600'}>₹ {grandtotal}</Text>
+          <hr />
+          <Flex justifyContent={"space-between"} mt={2} fontSize={"16px"}>
+            <Text fontWeight={"600"}>Total Amount</Text>
+            <Text fontWeight={"600"}>
+              ₹{" "}
+              {cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)}
+            </Text>
           </Flex>
           <Link to="/cart/address">
-          <Button w={'100%'} mt={3} borderRadius={'0'} colorScheme='red'>PLACE ORDER</Button>
+            <Button w={"100%"} mt={3} borderRadius={"0"} colorScheme="red">
+              PLACE ORDER
+            </Button>
           </Link>
         </Box>
-
-        <Box>
-          {discount === 0 ? (
-            <Modal onClose={onClose} isOpen={isOpen} isCentered>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader>Enter Coupon Code</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Input
-                    placeholder="Enter Coupon Code"
-                    value={data}
-                    onChange={(e) => setData(e.target.value)}
-                  ></Input>
-                  <Button onClick={handleCouponCode}>Apply</Button>
-                </ModalBody>
-                <ModalFooter>
-                  <Button onClick={onClose}>Close</Button>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
-          ) : (
-            ""
-          )}
-        </Box>
+        <Box></Box>
       </SimpleGrid>
     </>
   );

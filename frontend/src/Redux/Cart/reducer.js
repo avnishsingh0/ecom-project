@@ -1,31 +1,35 @@
-import { APPLY_COUPON_DISCOUNT, CART_PAGE_TOTAL_AMOUNT, CART_PAGE_TOTAL_ITEMS, GET_CART_DATA_FAILURE, GET_CART_DATA_REQUEST, GET_CART_DATA_SUCCESS, QUANTITY_CHANGE_SUCCESS } from "../actionTypes";
 
-const initialState = {
-    cart: [],
-    isLoading: false,
-    isError: false,
-    totalCartAmount : 0,
-    totalItems : 0,
-    discount : 0
-  };
-  
-  export const reducer = (state = initialState, { type, payload }) => {
-    switch (type) {
-      case GET_CART_DATA_REQUEST:
-        return { ...state, isLoading: true };
-      case GET_CART_DATA_SUCCESS:
-        return { ...state, isLoading: false, cart: payload };
-      case GET_CART_DATA_FAILURE:
-        return { ...state, isLoading: false, isError: true };
-        case QUANTITY_CHANGE_SUCCESS:
-        return {...state, isLoading: false}
-      case CART_PAGE_TOTAL_AMOUNT:
-        return {...state, totalCartAmount: payload}
-      case CART_PAGE_TOTAL_ITEMS:
-        return {...state, totalItems: payload}
-      case APPLY_COUPON_DISCOUNT:
-        return {...state, discount:payload}
-      default:
+
+
+import { ADD_TO_CART_REMOVES, ADD_TO_CART_SUCCESS, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from "../actionTypes"
+
+
+export const cartReducer = (state={cartItems:[]},action) =>{
+  switch(action.type){
+    case ADD_TO_CART_SUCCESS:
+      const item= action.payload
+      const existItem= state.cartItems.find(x=> x.product === item.product)
+      if(existItem){
+        return{
+          ...state,
+          cartItems:state.cartItems.map(x=>x.product===existItem.product ? item:x)
+        }
+      }else{
+        return {
+          ...state, cartItems:[...state.cartItems,item]
+        }
+      }
+      case ADD_TO_CART_REMOVES:
+        return {
+          ...state,
+          cartItems:state.cartItems.filter(x=>x.product !== action.payload)
+        }
+      case CART_SAVE_SHIPPING_ADDRESS:
+        return{...state,shippingAdress:action.payload}
+      case CART_SAVE_PAYMENT_METHOD:
+        return {...state, paymentMethod:action.payload}
+        default:
         return state;
-    }
-  };
+  }
+
+}

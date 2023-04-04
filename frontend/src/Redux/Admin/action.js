@@ -17,7 +17,7 @@ export const adminError= ()=>{
 
 export const addProduct =(payLoad)=>(dispatch)=>{
     dispatch(adminRequest())
-    axios.post("http://localhost:8080/Winter",payLoad).then(()=>{
+    axios.post("https://inquisitive-plum-katydid.cyclic.app/Winter",payLoad).then(()=>{
         dispatch(postAdminSucess());
 
     })
@@ -28,7 +28,7 @@ export const addProduct =(payLoad)=>(dispatch)=>{
 
 export const getAdmin=(dispatch)=>{
     dispatch(adminRequest());
-    axios.get("http://localhost:8080/Winter")
+    axios.get("https://inquisitive-plum-katydid.cyclic.app/Winter")
     .then((res)=>{
         dispatch(getAdminSucess(res.data));
     })
